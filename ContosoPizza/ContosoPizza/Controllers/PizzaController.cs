@@ -1,6 +1,8 @@
-﻿using ContosoPizza.Models;
+﻿using ContosoPizza.Data;
+using ContosoPizza.Models;
 using ContosoPizza.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ContosoPizza.Controllers;
 
@@ -8,14 +10,20 @@ namespace ContosoPizza.Controllers;
 [Route("[controller]")]
 public class PizzaController : ControllerBase
 {
-    public PizzaController()
+    private readonly PizzaContext context;
+    public PizzaController(PizzaContext context)
     {
+        this.context = context;
     }
+
 
     // GET all action
     [HttpGet]
     public ActionResult<List<Pizza>> GetAll() =>
     PizzaService.GetAll();
+
+    [HttpGet("useEF")]
+    public ActionResult<List<Pizza>> GetEF() => this.context.Pizzas.AsNoTracking().ToList();
 
     // GET by Id action
     [HttpGet("{id}")]
@@ -30,10 +38,13 @@ public class PizzaController : ControllerBase
     }
 
     // POST action
-    [HttpPost] 
+   [HttpPost] 
    public IActionResult Create(Pizza pizza)
     {
-        PizzaService.Add(pizza);
+        //PizzaService.Add(pizza);
+        this.context.Pizzas.Add(pizza);
+        this.context.SaveChanges();
+
         return CreatedAtAction(nameof(Create), new { id = pizza.Id }, pizza);
     }
 
