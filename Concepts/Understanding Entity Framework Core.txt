@@ -70,4 +70,12 @@ a) INSTALL Microsoft.EntityFrameworkCore.Tools package
 
 b) Tools - Nucket Package manager - console
 
-c) Add-Migration InitialDatabase 
+c) Add-Migration InitialDatabase - this will create the migration file that includes all the information to create the database
+
+d) Update-Database
+
+----
+
+Updating controller to use context to retrevie information from database
+
+
