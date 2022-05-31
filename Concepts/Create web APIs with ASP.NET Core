@@ -1,0 +1,98 @@
+web APIs built using...
+
+1) Controllers
+or
+2) minimal APIs - with no controllers
+
+Controllers = classes that derive from ControllerBase and are used to handle web API requests
+
+----
+
+ControllerBase class - provides many properties and methods that are useful for handling HTTP requests
+
+Example...
+
+[ApiController]
+[Route("[controller]")]
+public class WeatherForecastController : ControllerBase
+
+NOTE
+Web API controllers should typically derive from ControllerBase rather from Controller.
+Controller derives from ControllerBase and adds support for views, so it's for handling web pages, not web API requests. 
+If the same controller must support views and web APIs, derive from Controller.
+
+Controller Base documentation - https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-6.0&tabs=visual-studio
+
+-----
+
+Attributes - sed to configure the behavior of web API controllers and action methods
+
+some examples...
+
+Attribute	Notes
+[Route]	Specifies URL pattern for a controller or action.
+[Bind]	Specifies prefix and properties to include for model binding.
+[HttpGet]	Identifies an action that supports the HTTP GET action verb.
+[Consumes]	Specifies data types that an action accepts.
+[Produces]	Specifies data types that an action returns.
+
+Example:
+
+[HttpPost]
+[ProducesResponseType(StatusCodes.Status201Created)]
+[ProducesResponseType(StatusCodes.Status400BadRequest)]
+public ActionResult<Pet> Create(Pet pet)
+{
+    pet.Id = _petsInMemoryStore.Any() ? 
+             _petsInMemoryStore.Max(p => p.Id) + 1 : 1;
+    _petsInMemoryStore.Add(pet);
+
+    return CreatedAtAction(nameof(GetById), new { id = pet.Id }, pet);
+}
+
+---
+
+ApiController Attribute - applied to specific controllers
+
+One approach to using the attribute on more than one- controller
+is to create a custom base controller class annotated with the [ApiController] attribute.
+
+[ApiController]
+public class MyControllerBase : ControllerBase
+{
+}
+////
+[Produces(MediaTypeNames.Application.Json)]
+[Route("[controller]")]
+public class PetsController : MyControllerBase
+
+----
+
+The [ApiController] attribute can be applied to an assembly. 
+When the [ApiController] attribute is applied to an assembly,
+all controllers in the assembly have the [ApiController] attribute applied.
+
+
+using Microsoft.AspNetCore.Mvc;
+[assembly: ApiController]
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+
+var app = builder.Build();
+
+app.UseHttpsRedirection();
+
+app.UseAuthorization();
+
+app.MapControllers();
+
+app.Run();
+
+----
+
+Automatic HTTP 400 responses - provided by ApiController - no need to manual validation
+
+----
+

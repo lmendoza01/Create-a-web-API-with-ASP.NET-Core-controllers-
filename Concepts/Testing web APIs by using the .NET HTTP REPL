@@ -1,0 +1,6 @@
+When you're developing a traditional website, you usually view and test your work in a web browser. 
+Web APIs accept and return data rather than HTML, so a web browser isn't the best web API testing tool.
+
+One of the easiest options for exploring and interacting with web APIs is the .NET HTTP REPL. 
+REPL stands for read-evaluate-print loop. It's a simple and popular way to a build interactive command-line environments. 
+In the next unit, you'll create a simple web API and then interact with it by using the .NET HTTP REPL.

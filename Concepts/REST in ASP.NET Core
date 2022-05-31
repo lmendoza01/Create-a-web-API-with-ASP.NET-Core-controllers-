@@ -1,0 +1,34 @@
+If you interact with the page by doing something like submitting a sign-in form or selecting a buy button, 
+the browser sends the information back to the web server.
+
+Web servers communicacte with other clients (browsers,mobile devices,other web servers, etc.)
+by using webservices.
+
+API clients communicate with the server over HTTP, and the two exchange information by using a data format such as JSON or XML
+
+APIs are often used in single-page applications (SPAs) that perform most of the user interface logic in a web browser.
+
+Representational State Transfer (REST) is an architectural style for building web services.
+REST requests are made over HTTP.
+They use the same HTTP verbs that web browsers use to retrieve webpages and to send data to servers. 
+
+GET: Retrieve data from the web service.
+
+POST: Create a new item of data on the web service.
+
+PUT: Update an item of data on the web service.
+
+PATCH: Update an item of data on the web service by describing a set of instructions about how the item should be modified. 
+The sample application in this module doesn't use this verb.
+
+DELETE: Delete an item of data on the web service.
+
+RESTful APIs - are defined by..
+
+1) Base URL
+2) HTTP methods
+3) Data - JSON/XML
+
+We use routing to map URIs to logical divisions in our code, so that requests to https://localhost:5000/pizza are routed to PizzaController. 
+Requests to https://localhost:5000/order are routed to OrderController.
+
