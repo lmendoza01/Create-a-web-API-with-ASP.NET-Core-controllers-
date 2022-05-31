@@ -12,3 +12,7 @@ In this module, you'll create a new web API application by using ASP.NET Core, a
 What is the main goal?
 
 By the end of this session, you'll be able to create new web API applications by using ASP.NET Core. You'll also know how to create API controllers that implement basic CRUD logic.
+
+FUTURE TRAININGS
+
+https://docs.microsoft.com/en-us/learn/modules/persist-data-ef-core/
