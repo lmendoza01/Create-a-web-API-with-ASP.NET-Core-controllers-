@@ -50,7 +50,7 @@ Changes you make to the collections exposed by those properties will be propagat
 
 ----
 
-connection
+connection (default: port 5432)
 
 1) Add connectionStrings to the appsettings.json
 
@@ -64,4 +64,10 @@ builder.Services.AddDbContext<PizzaContext>(
     o => o.UseNpgsql(builder.Configuration.GetConnectionString("PizzaDb"))
     );
 
-3) 
+3) creating Database with Migrations (feauture in EF core - provides a way to update and sync schema and data models)
+
+a) INSTALL Microsoft.EntityFrameworkCore.Tools package
+
+b) Tools - Nucket Package manager - console
+
+c) Add-Migration InitialDatabase 
