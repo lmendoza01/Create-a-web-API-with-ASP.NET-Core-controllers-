@@ -32,3 +32,10 @@ RESTful APIs - are defined by..
 We use routing to map URIs to logical divisions in our code, so that requests to https://localhost:5000/pizza are routed to PizzaController. 
 Requests to https://localhost:5000/order are routed to OrderController.
 
+----
+
+Files and directories
+
+Controllers - Contains classes with public methods exposed as HTTP endpoints
+Program.cs - Configures services and the app's HTTP request pipeline, and contains the app's managed entry point
+
