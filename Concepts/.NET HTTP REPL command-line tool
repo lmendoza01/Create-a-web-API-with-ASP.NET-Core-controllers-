@@ -1,0 +1,21 @@
+The following command installs the .NET HTTP REPL command-line tool that you'll use to make HTTP requests to the web API.
+
+    dotnet tool install -g Microsoft.dotnet-httprepl
+
+Connect to the web API by running the following command
+
+    httprepl https://localhost:{PORT}
+
+Explore available endpoints by running the following command - detects all APIs available on the connected endpoint.
+
+    ls
+
+Go to an endpoint by running the following command - shows an output of available APIs for the endpoint
+
+    cd NAME_ENDPOINT
+
+Exit
+
+    exit
+
+
