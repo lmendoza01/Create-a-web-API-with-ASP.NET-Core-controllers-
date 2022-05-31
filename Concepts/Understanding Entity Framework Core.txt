@@ -1,0 +1,67 @@
+Entity Framework Core is an object-relational mapper (ORM)
+
+ORMs provide a layer between the domain model you implement in code and the database.
+
+This allows you to spend less time translating requests to and from the database and writing SQL,
+giving you more time to focus on important business logic
+
+
+-----
+
+Add package..
+
+dotnet add package Microsoft.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.Sqlite
+dotnet add package Microsoft.EntityFrameworkCore.PostgreSQL     
+-----
+
+
+DB Context - The DbContext is a special class that represents a unit of work and provides methods to configure options,
+connection strings, logging, and the model used to map your domain to the database. 
+
+Example...
+
+
+using Microsoft.EntityFrameworkCore;
+using ContosoPizza.Models;
+
+namespace ContosoPizza.Data;
+
+public class PizzaContext : DbContext
+{
+    public PizzaContext (DbContextOptions<PizzaContext> options)
+        : base(options)
+    {
+    }
+
+    public DbSet<Pizza> Pizzas => Set<Pizza>();
+    public DbSet<Topping> Toppings => Set<Topping>();
+    public DbSet<Sauce> Sauces => Set<Sauce>();
+}
+
+1) The DbSet<T> properties correspond to tables to be created in the database.
+
+2) The table names will match the DbSet<T> property names in the PizzaContext class.
+This behavior can be overridden if needed.
+
+3) When instantiated, PizzaContext will expose Pizzas, Toppings, and Sauces properties.
+Changes you make to the collections exposed by those properties will be propagated to the database.
+
+
+----
+
+connection
+
+1) Add connectionStrings to the appsettings.json
+
+ "ConnectionStrings": {
+    "PizzaDb" : "Server=localhost;Database=pizzadb;Port=;User Id=;Password="
+  }
+
+2) Program.cs
+
+builder.Services.AddDbContext<PizzaContext>(
+    o => o.UseNpgsql(builder.Configuration.GetConnectionString("PizzaDb"))
+    );
+
+3) 
